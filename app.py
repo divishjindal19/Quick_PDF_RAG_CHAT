@@ -11,13 +11,18 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 
-
 def get_pdf_text(pdf_docs):
     text = ""
     for pdf in pdf_docs:
-        pdf_reader = PdfReader(pdf)
-        for page in pdf_reader.pages:
-            text += page.extract_text()
+        try:
+            pdf_reader = PdfReader(pdf)
+            for page in pdf_reader.pages:
+                page_text = page.extract_text()
+                if page_text:
+                    text += page_text
+        except Exception as e:
+            st.warning(f"Error reading {pdf.name}: {e}")
+            continue
     return text
 
 def get_text_chunks(text, model_name):
@@ -54,7 +59,12 @@ def user_input(user_question, model_name, api_key, pdf_docs, conversation_histor
         st.warning("Please upload PDF files and provide API key before processing.")
         return
 
-    text_chunks = get_text_chunks(get_pdf_text(pdf_docs), model_name)
+    text = get_pdf_text(pdf_docs)
+    if not text.strip():
+        st.warning("No valid text extracted from the uploaded PDF files.")
+        return
+
+    text_chunks = get_text_chunks(text, model_name)
     vector_store = get_vector_store(text_chunks, model_name, api_key)
 
     if model_name == "Google AI":
@@ -201,4 +211,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
