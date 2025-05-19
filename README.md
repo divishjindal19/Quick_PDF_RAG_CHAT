@@ -8,7 +8,8 @@ An AI-powered PDF Question Answering application using **Retrieval-Augmented Gen
 
 ## 📸 Preview
 
-![App Screenshot](https://i.ibb.co/f2ttQ2W/pdf-rag-preview.png) <!-- Replace with actual screenshot if needed -->
+![Screenshot 2025-05-19 212647](https://github.com/user-attachments/assets/3d01d2bc-e0f7-4521-bc8e-bd63147b124d)
+
 
 ---
 
