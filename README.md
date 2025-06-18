@@ -1,4 +1,4 @@
-# Build Fast With AI - PDF RAG Assistant
+# PDF RAG Assistant
 
 An AI-powered PDF Question Answering application using **Retrieval-Augmented Generation (RAG)** with Google's **Gemini** model. Upload PDF files and get accurate, context-aware answers from them in a beautiful chat interface.
 
